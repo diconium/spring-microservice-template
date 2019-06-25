@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/ext")
@@ -23,7 +24,7 @@ public class ExternalController extends BaseController {
     @GetMapping("/dto")
     @ResponseBody
     @ApiOperation(value = "Get Custom DTO")
-    public List<CustomDTO> getDtos(HttpSession session) {
+    public List<CustomDTO> getDtos(@ApiIgnore HttpSession session) {
 
         LogBuilder.logStart(ExternalController.class.getSimpleName(), session.getId(), "getDtos");
 

@@ -4,7 +4,6 @@ import com.diconium.microservice.exception.RestCallTemplateException;
 import com.diconium.microservice.logging.LogBuilder;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,21 +14,19 @@ import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RestCallTemplate {
 
+    @Autowired
     private HttpClient client;
+
     private int statusCode;
     private InputStream content;
     private String reasonPhrase;
-
-    public RestCallTemplate() {
-        client = HttpClientBuilder.create().build();
-    }
 
     public InputStream execute(String url, HttpMethod method, Map<String, String> headers,
         String sessionId) {
